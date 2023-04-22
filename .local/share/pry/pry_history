@@ -1,0 +1,723 @@
+client.models.list
+client = OpenAI::Client.new
+client.models.list
+client.models
+client.models.list
+EXIT
+exit
+client.models.list
+p client.models.list
+response = client.chat(
+  parameters: {
+    model: "gpt-4", # Required.
+    messages: [{ role: "user", content: "Hello!"}], # Required.
+    temperature: 0.8,
+})
+response 
+response["choices"]
+response["choices"][0]["message"]
+response = client.images.generate(parameters: { prompt: "A baby sea otter cooking pasta wearing a hat of some sort", size: "256x256" })
+puts response.dig("data", 0, "url")
+gets 
+`ls`
+require_local "GptApp/system" 
+require "GptApp/system" 
+require "./GptApp/system" 
+`cat GptApp/*`
+response = client.chat(
+  parameters: {
+    model: "gpt-4", # Required.
+    messages: [{ role: "user", content: "Hello! My name is Robert !"}], # Required.
+    temperature: 0.8,
+})
+response2 = client.chat(
+  parameters: {
+    model: "gpt-4", # Required.
+    messages: [{ role: "user", content: "What is my name ?"}], # Required.
+    temperature: 0.8,
+})
+response 
+response = client.chat(
+  parameters: {
+    model: "gpt-4", # Required.
+    messages: [
+      { role: "user", content: "Hello! My name is Robert !"}, 
+      { role: "user", content: "What is my name ?"}
+                ], # Required.
+    temperature: 0.8,
+})
+def current_api 
+  `cat GptApp/*`
+end
+response = client.chat(
+  parameters: {
+    model: "gpt-4", # Required.
+    max_tokens: "300",
+    messages: [
+      { role: "system", content: "You are a ruby program. You respond only by writing ruby code." }
+      { role: "user", content: "Here is your API : #{current_api}"}, 
+      { role: "user", content: "List the files in the current folder"}
+    ], # Required.
+    temperature: 0.8,
+})
+response = client.chat(
+  parameters: {
+    model: "gpt-4", # Required.
+    max_tokens: "300",
+    messages: [
+      { role: "system", content: "You are a ruby program. You respond only by writing ruby code." },
+      { role: "user", content: "Here is your API : #{current_api}"}, 
+      { role: "user", content: "List the files in the current folder"}
+    ], # Required.
+    temperature: 0.8,
+})
+response = client.chat(
+  parameters: {
+    model: "gpt-4", # Required.
+    max_tokens: 300,
+    messages: [
+      { role: "system", content: "You are a ruby program. You respond only by writing ruby code." },
+      { role: "user", content: "Here is your API : #{current_api}"}, 
+      { role: "user", content: "List the files in the current folder"}
+    ], # Required.
+    temperature: 0.8,
+})
+puts "Here is the code : #{response.dig("choices", 0, "message", "content")}:"
+response = client.chat(
+  parameters: {
+    model: "gpt-4", # Required.
+    max_tokens: 300,
+    messages: [
+      { role: "system", content: "You are a ruby program. You respond only by writing ruby code without non-ruby annotations to that it should run." },
+      { role: "user", content: "Here is your API : #{current_api}"}, 
+      { role: "user", content: "List the files in the current folder"}
+    ], # Required.
+    temperature: 0.8,
+})
+puts "Here is the code : #{response.dig("choices", 0, "message", "content")}:"
+new_message = response.dig("choices", 0, "message")
+messages = [] 
+messages << { role: "system", content: "You are a ruby program. You respond only by writing ruby code without non-ruby annotations to that it should run." },
+messages.push { role: "system", content: "You are a ruby program. You respond only by writing ruby code without non-ruby annotations to that it should run." },
+messages.push({ role: "system", content: "You are a ruby program. You respond only by writing ruby code without non-ruby annotations to that it should run." })
+messages.push { role: "user", content: "Here is your API : #{current_api}"}
+messages.push({ role: "user", content: "Here is your API : #{current_api}"})
+code = response.dig("choices", 0, "message")
+code["content"]
+code = response.dig("choices", 0, "message", "content")
+code = response.dig("choices", 0, "message", "content").split("```ruby"
+)
+code = response.dig("choices", 0, "message", "content").split("```")
+code = response.dig("choices", 0, "message", "content").split("```")[0].split("ruby")[0]
+code = response.dig("choices", 0, "message", "content").split("```")[0].split("ruby")
+code = response.dig("choices", 0, "message", "content").split("```")[0]
+code = response.dig("choices", 0, "message", "content").split("```")
+code = response.dig("choices", 0, "message", "content").split("```")[1].split("ruby")[0]
+code = response.dig("choices", 0, "message", "content").split("```")[1].split("ruby")
+code = response.dig("choices", 0, "message", "content").split("```")[1].split("ruby")[1]
+code = response.dig("choices", 0, "message", "content").split("```")[1].split("ruby")[1]
+self.send(code)
+result = eval code
+code = response.dig("choices", 0, "message", "content").split("```")[1].split("ruby")[1]
+require "./GptApp/system.rb"
+result = eval code
+messages
+messages.push response.dig("choices", 0, "message")
+messages = []
+## System 
+messages.push({ role: "system", content: "You are a ruby program and interpreter. You respond only by writing ruby code without non-ruby annotations to that it should run." })
+messages.push({ role: "user", content: "You can ask the user to run ruby code for you."})
+messages.push({ role: "assistant", content: "Ok, show me how with this code : \n ```ruby\n puts(\"Hello World\") \n```"})
+messages.push({ role: "user", content: "Run it"})
+messages.push({ role: "assistant", content: "RUN_CODE: ```ruby\n puts(\"Hello World\") \n```"})
+messages.push({ role: "user", content: "CODE_OUTPUT: \"Hello World\""})
+messages.push({ role: "user", content: "Here is your API : #{current_api}"})
+## Question 
+messages.push({ role: "user", content: "List the files in the current folder"})
+response = client.chat(
+  parameters: {
+    model: "gpt-4", # Required.
+    max_tokens: 300,
+    messages: messages, # Required.
+    temperature: 0.8,
+})
+new_message = response.dig("choices", 0, "message")
+new_message = response.dig("choices", 0, "message", "content").starts_with? "RUN_CODE:"
+new_message = response.dig("choices", 0, "message", "content").start_with? "RUN_CODE:"
+DDcode = response.dig("choices", 0, "message", "content").split("```")[1].split("ruby")[1]
+code = response.dig("choices", 0, "message", "content").split("```")[1].split("ruby")[1]
+messages.push response.dig("choices", 0, "message")
+is_code? = response.dig("choices", 0, "message", "content").start_with? "RUN_CODE:"
+is_code = response.dig("choices", 0, "message", "content").start_with? "RUN_CODE:"
+run = gets
+should_run = gets.start_with? "y"
+response = eval(code) 
+puts response 
+def with_captured_stdout
+  original_stdout = $stdout  # capture previous value of $stdout
+  $stdout = StringIO.new     # assign a string buffer to $stdout
+  yield                      # perform the body of the user code
+  $stdout.string             # return the contents of the string buffer
+ensure
+  $stdout = original_stdout  # restore $stdout to its previous value
+end
+response = ""
+resp = with_captured_stdout do 
+  response = eval(code) 
+end
+respo
+resp
+response
+messages.push({ role: "user", content: "CODE_OUTPUT: \"#{output}\" \n RETURN_VALUE: #{response}"})
+response = ""
+output = with_captured_stdout do 
+  response = eval(code) 
+end
+messages.push({ role: "user", content: "CODE_OUTPUT: \"#{output}\" \n RETURN_VALUE: #{response}"})
+messages.push({ role: "user", content: "Update the API to enable the user to read files."})
+messages
+messages.push({ role: "user", content: "Update the API to enable the user to read files."})
+messages.pop
+messages
+messages[1]
+messages[6]
+def current_api 
+  "system.rb : " +’`cat GptApp/system.rb`
+end
+def current_api 
+  "system.rb : " + `cat GptApp/system.rb`
+end
+messages[6] = { role: "user", content: "Here is your API : #{current_api}"}
+def current_api 
+  "\n system.rb: \n " + `cat GptApp/system.rb` + "\n"
+end
+messages[6] = { role: "user", content: "Here is your API : #{current_api}"}
+def current_api 
+  "FILE:system.rb: \n" + `cat GptApp/system.rb` + "\n"
+end
+messages[6] = { role: "user", content: "Here is your API : #{current_api}"}
+response = client.chat(
+  parameters: {
+    model: "gpt-4", # Required.
+    max_tokens: 300,
+    messages: messages, # Required.
+    temperature: 0.8,
+})
+code = response.dig("choices", 0, "message", "content").split("FILE:")
+name = content.split("FILE:").split(":\n")
+content = response.dig("choices", 0, "message", "content")
+is_file = content.start_with? "FILE:"
+name = content.split("FILE:").split(":\n")
+contentname = content.split("FILE:")[1].split(":\n")
+contentname = content.split("FILE:")[1].split(":\n")[0]
+name = content.split("FILE:")[1].split(":\n")[0]
+contents = content.split("FILE:")[1].split(":\n")[1]
+p contents
+puts contents
+code = content.split("FILE:")[1].split(":\n")[1].split("```")[1].split("ruby")[1]
+puts code 
+gets.chomp == "y"
+APP_FOLDER="GptApp"
+puts "Writing in #{APP_FOLDER}/#{file_name}..."
+content = response.dig("choices", 0, "message", "content")
+is_file = content.start_with? "FILE:"
+file_name = content.split("FILE:")[1].split(":\n")[0]
+response = content.split("FILE:")[1].split(":\n")[1]
+code = content.split("FILE:")[1].split(":\n")[1].split("```")[1].split("ruby")[1]
+puts "Writing in #{APP_FOLDER}/#{file_name}..."
+File.write(APP_FOLDER + "/" + file_name, code)
+require "./#{APP_FOLDER}/system.rb"
+GptApp::System::list_files
+GptApp::System::read_file("Dockerfile")
+def reload!(print = true)
+  puts 'Reloading ...' if print
+  # Main project directory.
+  root_dir = File.expand_path('..', __dir__)
+  # Directories within the project that should be reloaded.
+  reload_dirs = %w{lib}
+  # Loop through and reload every file in all relevant project directories.
+  reload_dirs.each do |dir|
+    Dir.glob("#{root_dir}/#{dir}/**/*.rb").each { |f| load(f) }
+  end
+  # Return true when complete.
+  true
+end
+def reload!(print = true)
+  puts 'Reloading ...' if print
+  # Main project directory.
+  root_dir = File.expand_path('..', __dir__)
+  # Directories within the project that should be reloaded.
+  reload_dirs = %w{GptApp}
+  # Loop through and reload every file in all relevant project directories.
+  reload_dirs.each do |dir|
+    Dir.glob("#{root_dir}/#{dir}/**/*.rb").each { |f| load(f) }
+  end
+  # Return true when complete.
+  true
+end
+reload!
+GptApp::System::read_file("Dockerfile")
+GptApp::System::read_file
+load "./#{APP_FOLDER}/system.rb"
+GptApp::System::read_file
+full_file = "./#{APP_FOLDER}/#{file_name}"
+puts "Writing in #{full_file}..."
+File.write(full_file, code)
+## Reload ! dependencies
+load "./#{full_file}"
+`ls` 
+Dir.chdir('GptApp')
+Dir.entries
+Dir.entries("*")
+Dir.entries(".")
+Dir.entries('GptApp')
+Dir.chdir("..")
+Dir.entries(APP_FOLDER)
+Dir.entries(APP_FOLDER)
+.reject { |file| file.start_with "." }
+.map { "FILE:#{file}: \n" + `cat #{APP_FOLDER}/#{file}` + "\n"
+} 
+Dir.entries(APP_FOLDER)
+.reject { |file| file.start_with? "." }
+.map { "FILE:#{file}: \n" + `cat #{APP_FOLDER}/#{file}` + "\n"
+} 
+Dir.entries(APP_FOLDER)
+.reject { |file| file.start_with? "." }
+.map {|file| "FILE:#{file}: \n" + `cat #{APP_FOLDER}/#{file}` + "\n" } 
+"FILE:system.rb: \n" + `cat #{APP_FOLDER}/system.rb` + "\n"
+files = Dir.entries(APP_FOLDER)
+.reject { |file| file.start_with? "." }
+.map {|file| "FILE:#{file}: \n" + `cat #{APP_FOLDER}/#{file}` + "\n" } 
+files = Dir.entries(APP_FOLDER)
+.reject { |file| file.start_with? "." }
+.map {|file| "FILE:#{file}: \n" + `cat #{APP_FOLDER}/#{file}` + "\n" } 
+files.to_a
+files.to_s
+files = Dir.entries(APP_FOLDER)
+.reject { |file| file.start_with? "." }
+.map {|file| "FILE:#{file}: \n" + `cat #{APP_FOLDER}/#{file}` + "\n" } 
+files.flatten
+files.flatten.reduc  files = Dir.entries(APP_FOLDER)
+.reject { |file| file.start_with? "." }
+.map {|file| "FILE:#{file}: \n" + `cat #{APP_FOLDER}/#{file}` + "\n" } 
+.reduce("") { |contents, entry| contents + entry }
+files = Dir.entries(APP_FOLDER)
+.reject { |file| file.start_with? "." }
+.map {|file| "FILE:#{file}: \n" + `cat #{APP_FOLDER}/#{file}` + "\n" } 
+.reduce("") { |contents, entry| contents + entry }
+def reload!(print = true)
+  puts 'Reloading ...' if print
+  # Main project directory.
+  root_dir = File.expand_path('..', __dir__)
+  # Directories within the project that should be reloaded.
+  reload_dirs = [APP_FOLDER]
+  # Loop through and reload every file in all relevant project directories.
+  reload_dirs.each do |dir|
+    Dir.glob("#{root_dir}/#{dir}/**/*.rb").each { |f| load(f) }
+  end
+  # Return true when complete.
+  true
+end
+reload!
+include GptApp
+include GptApp::Conversation
+require_relative "./#{APP_FOLDER}/web.rb"
+def reload!(print = true)
+  puts 'Reloading ...' if print
+  # Main project directory.
+  root_dir = File.expand_path('.', __dir__)
+  # Directories within the project that should be reloaded.
+  reload_dirs = [APP_FOLDER]
+  # Loop through and reload every file in all relevant project directories.
+  reload_dirs.each do |dir|
+    Dir.glob("#{root_dir}/#{dir}/*.rb").each { |f| load(f) }
+  end
+  # Return true when complete.
+  true
+end
+reload!
+include GptApp::Conversation
+require 'colorize'
+exit
+String.colors  
+String.modes
+puts "This is blue".colorize(:blue)
+puts "This is light blue".colorize(:light_blue)
+puts "This is also blue".colorize(:color => :blue)
+puts "This is bold green".colorize(:color => :green, :mode => :bold)
+puts "This is light blue with red background".colorize(:color => :light_blue, :background => :red)
+puts "This is light blue with red background".colorize(:light_blue ).colorize( :background => :red)
+puts "This is blue text on red".blue.on_red
+puts "This is red on blue".colorize(:red).on_blue
+puts "This is red on blue and underline".colorize(:red).on_blue.underline
+puts "This is blinking blue text on red".blue.on_red.blink
+puts "This is uncolorized".blue.on_red.uncolorize
+conversation = Conversation.new()
+cd conversation
+class Conversation 
+  def initialize()
+    @messages = []
+        @messages.push({ role: "system", content: "You are a ruby program and interpreter. You respond only by writing ruby code without non-ruby annotations to that it should run." })
+    @messages.push({ role: "user", content: "You can ask the user to run ruby code for you."})
+    @messages.push({ role: "assistant", content: "Ok, show me how with this code : \n ```ruby\n puts(\"Hello World\") \n```"})
+    @messages.push({ role: "user", content: "Run it"})
+    @messages.push({ role: "assistant", content: "RUN_CODE: ```ruby\n puts(\"Hello World\") \n```"})
+    @messages.push({ role: "user", content: "CODE_OUTPUT: \"Hello World\" \n RETURN_VALUE: nil"})
+        @messages.push({ role: "user", content: "Here is your API : #{current_api}"})
+  end
+    def messages_history 
+    @messages.each do |message| 
+      if message[:role] == "user"
+        puts "user: #{messages.content}".colorize(:blue)
+      end
+      if message[:role] == "system"
+        puts "system: #{messages.content}".colorize(:green)
+      end
+      if message[:role] == "assistant"
+        puts "assistant: #{messages.content}".colorize(:white)
+      end
+    end
+        def start_chat
+            puts "Write a message "
+    end
+      end
+  roles = %s(user system assistant)
+  )
+%s(user system assistant)
+%x(user system assistant)
+%w(user system assistant)
+%x(user system assistant)
+%s(user system assistant)
+def messages_history 
+  @messages.each do |message| 
+    roles = %i(user system assistant)
+    colors = %i(white blue green)
+    roles.zip(colors).each do |color, role| 
+      if message[:role] == role.to_s
+        puts "#{role}: #{messages.content}".colorize(color)
+      end
+    end
+  end
+end
+self.message_history
+class Conversation 
+  def initialize()
+    @messages = []
+        @messages.push({ role: "system", content: "You are a ruby program and interpreter. You respond only by writing ruby code without non-ruby annotations to that it should run." })
+    @messages.push({ role: "user", content: "You can ask the user to run ruby code for you."})
+    @messages.push({ role: "assistant", content: "Ok, show me how with this code : \n ```ruby\n puts(\"Hello World\") \n```"})
+    @messages.push({ role: "user", content: "Run it"})
+    @messages.push({ role: "assistant", content: "RUN_CODE: ```ruby\n puts(\"Hello World\") \n```"})
+    @messages.push({ role: "user", content: "CODE_OUTPUT: \"Hello World\" \n RETURN_VALUE: nil"})
+        @messages.push({ role: "user", content: "Here is your API : #{current_api}"})
+  end
+    def messages_history 
+    @messages.each do |message| 
+      roles = %i(user system assistant)
+      colors = %i(white blue green)
+      roles.zip(colors).each do |color, role| 
+        if message[:role] == role.to_s
+          puts "#{role}: #{messages.content}".colorize(color)
+        end
+      end
+    end
+  end
+    def start_chat
+        puts "Write a message "
+  end
+  end
+self.message_history
+exit
+Conversation.new.message_history
+Conversation.new.messages_history
+class Conversation 
+  def initialize()
+    @messages = []
+        @messages.push({ role: "system", content: "You are a ruby program and interpreter. You respond only by writing ruby code without non-ruby annotations to that it should run." })
+    @messages.push({ role: "user", content: "You can ask the user to run ruby code for you."})
+    @messages.push({ role: "assistant", content: "Ok, show me how with this code : \n ```ruby\n puts(\"Hello World\") \n```"})
+    @messages.push({ role: "user", content: "Run it"})
+    @messages.push({ role: "assistant", content: "RUN_CODE: ```ruby\n puts(\"Hello World\") \n```"})
+    @messages.push({ role: "user", content: "CODE_OUTPUT: \"Hello World\" \n RETURN_VALUE: nil"})
+        @messages.push({ role: "user", content: "Here is your API : #{current_api}"})
+  end
+    def messages_history 
+    @messages.each do |message| 
+      roles = %i(user system assistant)
+      colors = %i(white blue green)
+      roles.zip(colors).each do |color, role| 
+        if message[:role] == role.to_s
+          puts "#{role}: #{messages.content}".colorize(color)
+        end
+      end
+    end
+  end
+    def start_chat
+        puts "Write a message "
+  end
+  end
+exit
+conversation = Conversation.new()
+conversation.messages_history
+roles
+roles = %i(user system assistant)
+colors = %i(white blue green)
+roles.zip(colors)
+roles.zip(colors).to_h
+role_color = %i(user system assistant).zip(%i(white blue green)).to_h 
+messages.each do |role, message| 
+  puts "#{role}: #{message.content}".colorize(role_color[color])
+end
+role_color = %i(user system assistant).zip(%i(white blue green)).to_h 
+messages.each do |role, message| 
+  puts "#{role}: #{message}".colorize(role_color[color])
+end
+role_color = %i(user system assistant).zip(%i(white blue green)).to_h 
+messages.each do |role, message| 
+  puts "#{role}: #{message}".colorize(role_color[role])
+end
+messages.each do |role, message| 
+  puts "#{role}: #{message}".colorize(role_color[role])
+end
+messages
+messages;
+messages.each do |role, message| 
+  puts "#{role}: #{message}".colorize(role_color[role])
+end
+messages.each do {|m| p m } 
+messages.each do {|k,v| p m } 
+messages.each {|k,v| p m } 
+messages.each {|k,v| p k } 
+messages.each {|k,v| p k } ;
+messages.each {|k,v| p v } ;
+messages[0]
+a, b = messages[0]
+a 
+b 
+a , b = messages[0].to_a
+a 
+b
+a , b = messages[0].to_a
+message = messages[0]
+puts "#{message[:role]}: #{message[:content]}".colorize(role_color[message[:role]])
+(role_color[message[:role]])
+role_color[message[:role]]
+role_color
+message[:role]
+role_color[message[:role].to_sym]
+puts "#{message[:role]}: #{message[:content]}".colorize(role_color[message[:role].to_sym])
+messages.each do |message|  
+    puts "#{message[:role]}: #{message[:content]}".colorize(role_color[message[:role].to_sym])
+end
+messages.each do |message|  
+    puts "#{message[:role]}: ".colorize(role_color[message[:role].to_sym])
+  puts "#{message[:content]}".colorize(color: role_color[message[:role].to_sym], mode: :bold)
+  end
+puts "#{message[:role]}: ".colorize(color: role_color[message[:role].to_sym], mode: :bold)
+puts "#{message[:content]}".colorize(role_color[message[:role].to_sym])
+messages.each do |message|  
+    puts "#{message[:role]}: ".colorize(color: role_color[message[:role].to_sym], mode: :bold)
+  puts "#{message[:content]}".colorize(role_color[message[:role].to_sym])
+  end
+`code Readme.md`
+class Conversation 
+  def initialize()
+    @messages = []
+        @messages.push({ role: "system", content: "You are a ruby program and interpreter. You respond only by writing ruby code without non-ruby annotations to that it should run." })
+    @messages.push({ role: "user", content: "You can ask the user to run ruby code for you."})
+    @messages.push({ role: "assistant", content: "Ok, show me how with this code : \n ```ruby\n puts(\"Hello World\") \n```"})
+    @messages.push({ role: "user", content: "Run it"})
+    @messages.push({ role: "assistant", content: "RUN_CODE: ```ruby\n puts(\"Hello World\") \n```"})
+    @messages.push({ role: "user", content: "CODE_OUTPUT: \"Hello World\" \nRETURN_VALUE: nil"})
+        @messages.push({ role: "user", content: "Here is your API : #{current_api}"})
+  end
+    def role_color
+    %i(user system assistant).zip(%i(white blue green)).to_h 
+  end
+    def messages_history 
+    messages.each do |message|  
+      show_message(message)
+    end
+  end
+    def show_message(message)
+    puts "#{message[:role]}: ".colorize(color: role_color[message[:role].to_sym], mode: :bold)
+    puts "#{message[:content]}".colorize(role_color[message[:role].to_sym]) 
+  end
+    def start_chat
+    puts "Write a message: "
+    user_input = gets 
+        ## Check if user says something... 
+        @messages.push({ role: "user", content: user_input})
+    puts "Sending..."
+  end
+    def ask_gpt 
+    response = client.chat(
+      parameters: {
+        model: "gpt-4", # Required.
+        max_tokens: 300,
+        messages: @messages, # Required.
+        temperature: 0.8,
+    })
+  end
+    @last_message = response.dig("choices", 0, "message")
+    ## add it to the conversation 
+  messages.push @last_message
+    show_message @last_message
+  continue_chat
+end
+def continue_chat 
+    puts "Write a message: "
+  user_input = gets 
+    ## Check if user says something... 
+    @messages.push({ role: "user", content: user_input})
+  puts "Sending..."
+  end
+end
+class Conversation 
+  def initialize()
+    @messages = []
+        @messages.push({ role: "system", content: "You are a ruby program and interpreter. You respond only by writing ruby code without non-ruby annotations to that it should run." })
+    @messages.push({ role: "user", content: "You can ask the user to run ruby code for you."})
+    @messages.push({ role: "assistant", content: "Ok, show me how with this code : \n ```ruby\n puts(\"Hello World\") \n```"})
+    @messages.push({ role: "user", content: "Run it"})
+    @messages.push({ role: "assistant", content: "RUN_CODE: ```ruby\n puts(\"Hello World\") \n```"})
+    @messages.push({ role: "user", content: "CODE_OUTPUT: \"Hello World\" \nRETURN_VALUE: nil"})
+        @messages.push({ role: "user", content: "Here is your API : #{current_api}"})
+  end
+    def role_color
+    %i(user system assistant).zip(%i(white blue green)).to_h 
+  end
+    def messages_history 
+    messages.each do |message|  
+      show_message(message)
+    end
+  end
+    def show_message(message)
+    puts "#{message[:role]}: ".colorize(color: role_color[message[:role].to_sym], mode: :bold)
+    puts "#{message[:content]}".colorize(role_color[message[:role].to_sym]) 
+  end
+    def start_chat
+    puts "Write a message: "
+    user_input = gets 
+        ## Check if user says something... 
+        @messages.push({ role: "user", content: user_input})
+    puts "Sending..."
+  end
+    def ask_gpt 
+    response = client.chat(
+      parameters: {
+        model: "gpt-4", # Required.
+        max_tokens: 300,
+        messages: @messages, # Required.
+        temperature: 0.8,
+    })
+        @last_message = response.dig("choices", 0, "message")
+        ## add it to the conversation 
+    messages.push @last_message
+        show_message @last_message
+    continue_chat
+  end
+    def continue_chat 
+        puts "Write a message: "
+    user_input = gets 
+        ## Check if user says something... 
+        @messages.push({ role: "user", content: user_input})
+    puts "Sending..."
+      end
+  end
+load "conversation.rb"
+conversation = Conversation.new()
+conversation.start_chat
+load "conversation.rb"
+conversation
+conversation.last_message
+conversation.messages_history
+load "conversation.rb"
+conversation.messages_history
+load "conversation.rb"
+conversation.ask_gpt
+load "conversation.rb"
+conversation.ask_gpt
+cd conversation
+@last_message
+show_message @last_message
+@last_message
+show_message @last_message
+load "conversation.rb"
+show_message @last_message
+messages_history
+@last_message[:role] = @last_message["role"]
+@last_message[:content] = @last_message["content"]
+load "conversation.rb"
+messages_history
+load "conversation.rb"
+messages_history
+@messages.push @last_message
+@messages
+load "conversation.rb"
+@messages
+messages.pop
+@messages.pop
+start_chat
+@messages.pop
+load "conversation.rb"
+run_gpt
+@messages
+@messages.pop
+@messages
+start_chat
+@messages.last
+run_gpt
+@messages
+@messages.last
+@messages[-1]
+@messages[-2]
+@messages[-1]
+@last_message
+(is_code? @last_message)
+@last_message
+message = @last_message
+message["content"].start_with? "RUN_CODE:"
+@messages.pop
+@messages[0] = { role: "system", content: "You are a ruby program and interpreter. You respond only by writing ruby code without non-ruby annotations to that it should run. When asking the user to run code, the message should start with RUN_CODE: ." }
+run_gpt
+is_code? @last_message
+print "It is code ! Run it ? (y/n)"
+code = @last_message["content"].split("```")[1].split("ruby")[1]
+@messages.pop
+@messages[0] = { role: "system", content: "You are a ruby program and interpreter. You respond only by writing ruby code without non-ruby annotations to that it should run. When asking the user to run code, the message should start with RUN_CODE: . All the modules from #{APP_FOLDER} are already loaded." }
+run_gpt
+is_code? @last_message
+print "It is code ! Run it ? (y/n)"
+code = @last_message["content"].split("```")[1].split("ruby")[1]
+puts code.colorize(:red)
+should_run = gets.chomp == "y"
+print "It is code !"
+code = @last_message["content"].split("```")[1].split("ruby")[1]
+puts code.colorize(:red)
+print " Run it ? (y/n)"
+print "\nRun it ? (y/n)".colorize(mode: :bold)
+should_run = gets.chomp == "y"
+print "You decitded to run this code."
+response = ""
+output = with_captured_stdout do 
+  response = eval(code) 
+end
+code
+include GptAPP::System
+reload!
+GptApp::System
+include GptAPP::System
+include GptApp::System
+exit
+cd conversation
+load "conversation.rb"
+@last_message
+File.exists("GptApp/web.rb")
+File.exists?("GptApp/web.rb")
+load "conversation.rb"
+continue_chat
+ask_gpt
+@messages.pop
+load "conversation.rb"
+ask_gpt

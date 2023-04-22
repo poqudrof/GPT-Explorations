@@ -1,6 +1,6 @@
 
 module GptApp 
-  module web 
+  module Web 
     def download_file(url)
       `wget #{}`
     end
