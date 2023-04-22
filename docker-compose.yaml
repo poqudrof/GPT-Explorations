@@ -7,7 +7,7 @@ services:
       - "3000:3000"
     volumes:
       - .:/home/appuser
-      - gem_cache:/usr/local/bundle
+      #- gem_cache:/usr/local/bundle
     environment:
       - RUBY_ENV=development
 

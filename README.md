@@ -2,7 +2,9 @@
 
 ## Goal 
 
-Create a way to program and communicate with GPT-4 to make use it in new ways. 
+Initial: Create a way to program and communicate with GPT-4 to make use it in new ways. 
+
+New goal: Create a Ruby program and API that writes itself interactively like AutoGPT.
 
 
 ## Run 
@@ -11,6 +13,11 @@ Create a way to program and communicate with GPT-4 to make use it in new ways.
 ### With Docker and Docker compose 
 
 docker compose run --build  ruby_app    
+
+
+### Update Gemfile.lock 
+
+docker build -t gpt-gemfile -f Dockerfile.bundler . && docker run  -v "$(pwd):/home/appuser" --rm -p 3000:3000 --name gpt-gem-run gpt-gemfile
 
 
 ## Shortcuts 

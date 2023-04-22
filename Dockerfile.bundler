@@ -17,14 +17,7 @@ USER appuser
 
 # Copy the Gemfile and Gemfile.lock into the working directory
 COPY Gemfile ./
-#COPY --chown=appuser:appuser Gemfile Gemfile.lock ./
-
-RUN bundle install
-# Copy the rest of the application code into the working directory
-
-# COPY --chown=appuser:appuser app.rb ./
-# Expose the port that the application will run on
-# EXPOSE 3000
+# COPY --chown=appuser:appuser Gemfile Gemfile.lock ./
 
 # Start the application
-CMD ["ruby", "app.rb"]
+CMD ["bundle", "install"]
