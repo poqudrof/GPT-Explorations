@@ -722,3 +722,79 @@ ask_gpt
 load "conversation.rb"
 ask_gpt
 exit
+@messages 
+exit
+reload!
+exit
+get_url_information("http://google.com")
+include GptApp
+GptApp::Images::get_url_information("http://google.com")
+GptApp::Web::get_url_information("http://google.com")
+reload!
+GptApp::Web::get_url_information("http://google.com")
+GptApp::Web::get
+GptApp::Web
+GptApp::Web::get_url_information "http://google.com"
+reload!
+load "./GptApp/web.rb"
+GptApp::Web::get_url_information "http://google.com"
+GptApp::Web
+GptApp::Web::
+a
+GptApp::Web::download_file 
+GptApp::Web::download_file
+cd ..
+cd .
+cd 
+exit
+GptApp
+GptApp::Web
+GptApp::Web::download_file 
+require 'net/http'
+require 'uri'
+module GptApp
+  module Web
+    def download_file(url)
+      `wget #{url}`
+    end
+        def get_url_information(url)
+      uri = URI(url)
+      response = Net::HTTP.get_response(uri)
+            {
+        code: response.code,
+        message: response.message,
+        header: response.header.to_hash
+      }
+    end
+  end
+end
+GptApp::Web::download_file 
+include GptApp
+GptApp
+cd / 
+GptApp
+require 'net/http'
+require 'uri'
+module GptApp
+  module Web
+    def download_file(url)
+      `wget #{url}`
+    end
+        def get_url_information(url)
+      uri = URI(url)
+      response = Net::HTTP.get_response(uri)
+            {
+        code: response.code,
+        message: response.message,
+        header: response.header.to_hash
+      }
+    end
+  end
+end
+GptApp
+exit
+get_url_information
+include GptApp
+include GptApp::Web
+get_url_information
+get_url_information("http://google.com")

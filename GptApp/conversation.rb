@@ -1,6 +1,6 @@
 
 class Conversation 
-  attr_reader :last_message, :client
+  attr_reader :last_message, :client, :messages
 
   def initialize(binding)
     @binding = binding
@@ -12,8 +12,12 @@ class Conversation
     @messages.push({ role: "user", content: "Run it"})
     @messages.push({ role: "assistant", content: "RUN_CODE: ```ruby\n puts(\"Hello World\") \n```"})
     @messages.push({ role: "user", content: "CODE_OUTPUT: \"Hello World\" \nRETURN_VALUE: nil"})
-    @messages.push({ role: "user", content: "Here is your API : #{current_api}"})
+    load_api
     messages_history 
+  end
+
+  def load_api
+    @messages[6] = ({ role: "user", content: "Here is your API : #{current_api}"})
   end
   
   def role_color
@@ -35,8 +39,13 @@ class Conversation
     puts "Write a message: "
     user_input = gets 
 
+    if user_input.chomp.downcase == "exit"
+      puts "Exiting the app..."
+      return
+    end
+
     if user_input.chomp == "pry"  
-      binding.pry
+      @binding.pry
       start_chat 
     end
 
@@ -134,11 +143,10 @@ class Conversation
 
       puts "Try to reload it"
       ## Reload ! dependencies
-      load "./#{full_file}"
+      load full_file
     else 
       puts "Not writing"
     end
 
   end
 end
-

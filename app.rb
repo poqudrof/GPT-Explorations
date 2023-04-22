@@ -62,27 +62,28 @@ reload!
 #require_relative "./#{APP_FOLDER}/web.rb"
 ##require "./#{APP_FOLDER}/system.rb"
 
-require_relative "./conversation.rb"
+# require_relative "./conversation.rb"
 
 
-messages = []
+# messages = []
 
-## System 
-messages.push({ role: "system", content: "You are a ruby program and interpreter. You respond only by writing ruby code without non-ruby annotations to that it should run. When asking the user to run code, the message should start with RUN_CODE: . All the modules from #{APP_FOLDER} are already loaded." })
-messages.push({ role: "user", content: "You can ask the user to run ruby code for you."})
-messages.push({ role: "assistant", content: "Ok, show me how with this code : \n ```ruby\n puts(\"Hello World\") \n```"})
-messages.push({ role: "user", content: "Run it"})
-messages.push({ role: "assistant", content: "RUN_CODE: ```ruby\n puts(\"Hello World\") \n```"})
-messages.push({ role: "user", content: "CODE_OUTPUT: \"Hello World\" \n RETURN_VALUE: nil"})
+# ## System 
+# messages.push({ role: "system", content: "You are a ruby program and interpreter. You respond only by writing ruby code without non-ruby annotations to that it should run. When asking the user to run code, the message should start with RUN_CODE: . All the modules from #{APP_FOLDER} are already loaded." })
+# messages.push({ role: "user", content: "You can ask the user to run ruby code for you."})
+# messages.push({ role: "assistant", content: "Ok, show me how with this code : \n ```ruby\n puts(\"Hello World\") \n```"})
+# messages.push({ role: "user", content: "Run it"})
+# messages.push({ role: "assistant", content: "RUN_CODE: ```ruby\n puts(\"Hello World\") \n```"})
+# messages.push({ role: "user", content: "CODE_OUTPUT: \"Hello World\" \n RETURN_VALUE: nil"})
 
-messages.push({ role: "user", content: "Here is your API : #{current_api}"})
+# messages.push({ role: "user", content: "Here is your API : #{current_api}"})
 
 ## Start the loop here 
 
+include GptApp 
 
 conversation = Conversation.new(binding)
 
-binding.pry 
+# binding.pry 
 
 # cd conversation 
 # continue_chat 
