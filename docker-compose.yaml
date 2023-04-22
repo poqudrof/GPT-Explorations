@@ -1,0 +1,15 @@
+version: '3.9'
+
+services:
+  ruby_app:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/home/appuser
+      - gem_cache:/usr/local/bundle
+    environment:
+      - RUBY_ENV=development
+
+volumes:
+  gem_cache:
