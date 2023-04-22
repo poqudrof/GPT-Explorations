@@ -721,3 +721,4 @@ ask_gpt
 @messages.pop
 load "conversation.rb"
 ask_gpt
+exit

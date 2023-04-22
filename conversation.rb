@@ -7,14 +7,12 @@ class Conversation
     @client = OpenAI::Client.new
     @messages = []
     @messages.push({ role: "system", content: "You are a ruby program and interpreter. You respond only by writing ruby code without non-ruby annotations to that it should run. When asking the user to run code, the message should start with RUN_CODE: . All the modules from #{APP_FOLDER} are already loaded." })
-
     @messages.push({ role: "user", content: "You can ask the user to run ruby code for you."})
     @messages.push({ role: "assistant", content: "Ok, show me how with this code : \n ```ruby\n puts(\"Hello World\") \n```"})
     @messages.push({ role: "user", content: "Run it"})
     @messages.push({ role: "assistant", content: "RUN_CODE: ```ruby\n puts(\"Hello World\") \n```"})
     @messages.push({ role: "user", content: "CODE_OUTPUT: \"Hello World\" \nRETURN_VALUE: nil"})
     @messages.push({ role: "user", content: "Here is your API : #{current_api}"})
-
     messages_history 
   end
   
@@ -36,8 +34,6 @@ class Conversation
   def start_chat
     puts "Write a message: "
     user_input = gets 
-
-    ## Check if user says something... 
     @messages.push({ role: "user", content: user_input})
     puts "Sending..."
     ask_gpt
@@ -46,9 +42,9 @@ class Conversation
   def run_gpt
     response = @client.chat(
       parameters: {
-          model: "gpt-4", # Required.
+          model: "gpt-4",
           max_tokens: 300,
-          messages: @messages, # Required.
+          messages: @messages,
           temperature: 0.8,
       })
 
@@ -57,21 +53,13 @@ class Conversation
     @last_message[:role] = @last_message["role"]
     @last_message[:content] = @last_message["content"]
     show_message @last_message
-    ## add it to the conversation 
     @messages.push @last_message
   end
 
   def ask_gpt 
     run_gpt 
-
-    if(is_code? @last_message)
-      code_chat
-    end
-
-    if(is_file? @last_message)
-      file_chat
-    end
-
+    code_chat if(is_code? @last_message)
+    file_chat if(is_file? @last_message)
     continue_chat
   end
 
@@ -79,12 +67,15 @@ class Conversation
     puts "Write a message: "
     user_input = gets 
 
-    ## Check if user says something... 
-
+    if user_input.chomp == "pry"  
+      binding.pry
+      continue_chat 
+    end
     @messages.push({ role: "user", content: user_input})
     puts "Sending..."
   end
 
+  ## Code answer
   def is_code?(message)
     message["content"].start_with? "RUN_CODE:"
   end
@@ -117,6 +108,7 @@ class Conversation
     end
   end 
 
+  ## File answer
   def is_file?(message)
     message["content"].start_with? "FILE:"
   end
@@ -160,6 +152,5 @@ class Conversation
     end
 
   end
-
 end
 
