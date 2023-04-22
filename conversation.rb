@@ -34,9 +34,22 @@ class Conversation
   def start_chat
     puts "Write a message: "
     user_input = gets 
+
+    if user_input.chomp == "pry"  
+      binding.pry
+      start_chat 
+    end
+
     @messages.push({ role: "user", content: user_input})
     puts "Sending..."
     ask_gpt
+    start_chat 
+  end
+
+  def ask_gpt 
+    run_gpt 
+    code_chat if(is_code? @last_message)
+    file_chat if(is_file? @last_message)
   end
 
   def run_gpt
@@ -49,30 +62,10 @@ class Conversation
       })
 
     @last_message = response.dig("choices", 0, "message")
-
     @last_message[:role] = @last_message["role"]
     @last_message[:content] = @last_message["content"]
     show_message @last_message
     @messages.push @last_message
-  end
-
-  def ask_gpt 
-    run_gpt 
-    code_chat if(is_code? @last_message)
-    file_chat if(is_file? @last_message)
-    continue_chat
-  end
-
-  def continue_chat 
-    puts "Write a message: "
-    user_input = gets 
-
-    if user_input.chomp == "pry"  
-      binding.pry
-      continue_chat 
-    end
-    @messages.push({ role: "user", content: user_input})
-    puts "Sending..."
   end
 
   ## Code answer
@@ -83,22 +76,17 @@ class Conversation
   def code_chat
     print "It is code !\n"
     code = @last_message["content"].split("```")[1].split("ruby")[1]
-    
     puts code.colorize(:red)
-
     print "\nRun it ? (y/n)".colorize(mode: :bold)
     
-    ## Ask the user if he wants to run it.
     should_run = gets.chomp == "y"
 
     if should_run
       print "You decided to run this code."
-    
       response = ""
       output = with_captured_stdout do 
         response = eval(code, @binding) 
       end
-
       message = { role: "user", content: "CODE_OUTPUT: \"#{output}\" \n RETURN_VALUE: #{response}"}
       show_message(message)
       @messages.push(message)
