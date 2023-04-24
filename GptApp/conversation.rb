@@ -41,7 +41,7 @@ class Conversation
 
     if user_input.chomp.downcase == "exit"
       puts "Exiting the app..."
-      return
+      exit
     end
 
     if user_input.chomp == "pry"  

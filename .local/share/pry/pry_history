@@ -798,3 +798,58 @@ include GptApp
 include GptApp::Web
 get_url_information
 get_url_information("http://google.com")
+exit
+running_processes
+GptApp::System::running_processes
+GptApp::System::running_pocesses
+GptApp::System
+exit
+reload!
+System
+System::read_file
+exit
+GptApp::System::running_processes
+GptApp
+GptApp::System
+cd GptApp::System
+cd ..
+load "GptApp/system.rb"
+GptApp::System.instance_method
+GptApp::System.instance_methods
+GptApp::System.list_files
+GptApp::System::list_files
+GptApp::System.send :list_files
+require 'net/http'
+require 'uri'
+module GptApp
+  module Web
+    def self.download_file(url)
+      `wget #{url}`
+    end
+        def self.get_url_information(url)
+      uri = URI(url)
+      response = Net::HTTP.get_response(uri)
+            {
+        code: response.code,
+        message: response.message,
+        header: response.header.to_hash
+      }
+    end
+  end
+end
+GptApp::System.list_files
+GptApp::Web.download_file "http://google.com"
+@messages.pop 
+cd conversation 
+@messages.pop 
+@messages.pop
+reload!
+@messages.push({:role=>"user",
+:content=>"generate an image with this prompt \"A beautiful cat sitting in the sun\" and save it to a file.\n"})
+require 'openai'
+openai_client = OpenAI::Client.new
+prompt = "A beautiful cat sitting in the sun"
+response, url = GptApp::Images.generate_image(openai_client, prompt)
+puts "Image URL: #{url}"
+GptApp::Web.download_file(url)
+puts "Image downloaded"

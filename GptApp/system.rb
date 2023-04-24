@@ -1,15 +1,15 @@
 
 module GptApp 
   module System 
-    def list_files 
+    def self.list_files 
       `ls`
     end
 
-    def read_file(file_name)
+    def self.read_file(file_name)
       File.read(file_name)
     end
     
-    def running_processes
+    def self.running_processes
       `ps aux`
     end
   end

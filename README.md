@@ -13,6 +13,10 @@ Use the API here is a prompt :
 
 > `List the files in the current folder`
 
+Generate an image: 
+
+> `generate an image with this prompt "A beautiful cat sitting in the sun", download the url with our API.`
+
 ## Use in Ruby with Pry
 
 Type `pry` instead of prompt. You can then interact using ruby. 
